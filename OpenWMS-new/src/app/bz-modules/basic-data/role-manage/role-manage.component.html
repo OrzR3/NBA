@@ -1,0 +1,105 @@
+<div class="user-table-container">
+  <form
+    class="form-inline top-filter-form form-bgcolor col-padding"
+    role="form"
+  >
+    <div class="form-group btn-margin-1rem">
+      <button
+        class="btn btn-primary local_basic_btn"
+        type="button"
+        (click)="add()"
+      >
+        <i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;新增
+      </button>
+    </div>
+  </form>
+  <div class="row no-margin">
+    <div class="col-xs-12 form-bgcolor col-padding">
+      <div class="user-item-container">
+        <p-table [value]="roleList">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="local_table_idx">序号</th>
+              <th>角色</th>
+              <th class="local_table_operate">操作</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-role let-rowIndex="rowIndex">
+            <tr>
+              <!--  *ngFor="let match of matchList;let i=index" -->
+              <td>{{ rowIndex + 1 }}</td>
+              <td>
+                <div class="local_table_left">{{ role.label }}</div>
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary btn-margin-1rem"
+                  type="button"
+                  (click)="menuEdit(rowIndex)"
+                >
+                  菜单权限
+                </button>
+                <button
+                  class="btn btn-primary btn-margin-1rem"
+                  type="button"
+                  (click)="roleEdit(rowIndex)"
+                >
+                  <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <button
+                  class="btn btn-primary btn-margin-1rem"
+                  type="button"
+                  (click)="roleDelete(rowIndex)"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-paginator
+          rows="{{ pageSize }}"
+          totalRecords="{{ totalSize }}"
+          [rowsPerPageOptions]="[15, 20, 30]"
+          (onPageChange)="onPage($event)"
+        ></p-paginator>
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog
+    header="Confirmation"
+    icon="pi pi-exclamation-triangle"
+  ></p-confirmDialog>
+  <p-dialog [(visible)]="display">
+    <p-header>
+      {{ headStr }}
+    </p-header>
+    <input
+      type="text"
+      size="30"
+      pInputText
+      [(ngModel)]="roleInfo.label"
+      placeholder="这里输入名称"
+      maxlength="20"
+      pInputText
+    />
+    <p-footer>
+      <button
+        type="button"
+        pButton
+        icon=""
+        (click)="formSave()"
+        label="保存"
+        *ngIf="true"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon=""
+        (click)="formCancel()"
+        label="取消"
+        *ngIf="true"
+      ></button>
+    </p-footer>
+  </p-dialog>
+</div>

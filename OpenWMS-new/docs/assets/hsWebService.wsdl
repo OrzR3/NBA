@@ -1,0 +1,48 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.zsgr.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="HsWebServiceService" targetNamespace="http://service.zsgr.com/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.zsgr.com/" elementFormDefault="unqualified" targetNamespace="http://service.zsgr.com/" version="1.0">
+<xs:element name="service" type="tns:service"/>
+<xs:element name="serviceResponse" type="tns:serviceResponse"/>
+<xs:complexType name="service">
+<xs:sequence>
+<xs:element minOccurs="0" name="param" type="xs:string"/>
+<xs:element minOccurs="0" name="data" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="serviceResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="serviceResponse">
+<wsdl:part element="tns:serviceResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="service">
+<wsdl:part element="tns:service" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="HsWebService">
+<wsdl:operation name="service">
+<wsdl:input message="tns:service" name="service"> </wsdl:input>
+<wsdl:output message="tns:serviceResponse" name="serviceResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="HsWebServiceServiceSoapBinding" type="tns:HsWebService">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="service">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="service">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="serviceResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="HsWebServiceService">
+<wsdl:port binding="tns:HsWebServiceServiceSoapBinding" name="HsWebServicePort">
+<soap:address location="/LeYunService/services/hsWebService"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="26px" viewBox="0 0 22 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Person_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.512517486 0.803 12.8166389 0.803 12.8166389 13.1063155 0.512517486 13.1063155"></polygon>
+    </defs>
+    <g id="Person_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="分组">
+            <g transform="translate(4.000000, 0.197400)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M12.584,5.2344 C13.938,10.2324 9.155,14.6444 4.112,12.5904 C2.719,12.0264 1.594,10.9004 1.028,9.5074 C-1.025,4.4644 3.387,-0.3186 8.385,1.0354 C10.422,1.5884 12.03,3.1974 12.584,5.2344" id="Fill-1" fill="#FEFEFE" mask="url(#mask-2)"></path>
+            </g>
+            <path d="M16.6104,25.1974 L4.7184,25.1974 C2.1234,25.1974 0.0004,23.0734 0.0004,20.4814 C0.0004,17.8864 2.1234,15.7654 4.7184,15.7654 L16.6104,15.7654 C19.2054,15.7654 21.3284,17.8864 21.3284,20.4814 C21.3284,23.0734 19.2054,25.1974 16.6104,25.1974" id="Fill-3" fill="#FEFEFE"></path>
+        </g>
+    </g>
+</svg>

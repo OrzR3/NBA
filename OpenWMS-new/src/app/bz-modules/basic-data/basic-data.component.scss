@@ -1,0 +1,33 @@
+$themeColor:#f36a21;
+
+ol,
+ul,
+li {
+  list-style: none;
+  text-align: left;
+}
+body .ui-dialog .ui-dialog-titlebar {
+  background-color:$themeColor !important;
+}
+/*公共类*/
+.local_table_check,
+.local_table_idx {
+  width: 5rem;
+}
+
+.local_table_operate {
+  width: 20rem;
+}
+
+.local_table_left {
+  text-align: left;
+}
+
+.is-must,
+.local_form_tips {
+  color: #ed1941;
+}
+
+.local_clear {
+  clear: both;
+}

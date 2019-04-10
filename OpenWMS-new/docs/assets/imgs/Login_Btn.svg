@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="65px" viewBox="0 0 65 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Login_Btn</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M59.436,55.254 C59.436,57.828 57.35,59.914 54.776,59.914 L4.707,59.914 C2.133,59.914 0.047,57.828 0.047,55.254 L0.047,5.184 C0.047,2.61 2.133,0.524 4.707,0.524 L54.776,0.524 C57.35,0.524 59.436,2.61 59.436,5.184 L59.436,55.254 Z" id="path-1"></path>
+        <linearGradient x1="49.999873%" y1="14.5605211%" x2="49.999873%" y2="137.457722%" id="linearGradient-3">
+            <stop stop-color="#FEFEFE" offset="0%"></stop>
+            <stop stop-color="#231916" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Login_Btn" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M64.5388,59.0264 C64.5388,61.7824 62.3058,64.0164 59.5488,64.0164 L5.9348,64.0164 C3.1778,64.0164 0.9438,61.7824 0.9438,59.0264 L0.9438,5.4114 C0.9438,2.6554 3.1778,0.4214 5.9348,0.4214 L59.5488,0.4214 C62.3058,0.4214 64.5388,2.6554 64.5388,5.4114 L64.5388,59.0264 Z" id="Fill-42" fill="#EB6800"></path>
+        <g id="分组" style="mix-blend-mode: multiply;" transform="translate(3.000000, 2.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-45"></g>
+            <path d="M59.436,55.254 C59.436,57.828 57.35,59.914 54.776,59.914 L4.707,59.914 C2.133,59.914 0.047,57.828 0.047,55.254 L0.047,5.184 C0.047,2.61 2.133,0.524 4.707,0.524 L54.776,0.524 C57.35,0.524 59.436,2.61 59.436,5.184 L59.436,55.254 Z" id="Fill-44" fill="url(#linearGradient-3)" mask="url(#mask-2)"></path>
+        </g>
+        <text id="LOGIN" font-family="LucidaGrande, Lucida Grande" font-size="10.2151" font-weight="normal" letter-spacing="-0.2783889" fill="#FEFEFE">
+            <tspan x="16.5537" y="49.9083256">L</tspan>
+            <tspan x="21.7220343" y="49.9083256" letter-spacing="0.12">OGIN</tspan>
+        </text>
+    </g>
+</svg>

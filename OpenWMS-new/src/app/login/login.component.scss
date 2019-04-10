@@ -1,0 +1,86 @@
+.login-screen {
+    height: 100%;
+    width: 100%;
+    background: url('../../assets/imgs/bg.png') top left no-repeat ;
+    background-size:100% 100%;
+    .login-form-container {
+        position: absolute;
+        width: 35%;
+        height: 240px;
+        left: 50%;
+        top: 50%;
+        margin-left: -17.5%;
+        margin-top: -110px;
+        padding: 30px 30px;
+        // background: rgb(65, 63, 63);
+        background: url(../../assets/imgs/Login_Box_img.svg) no-repeat center center;
+        background-size:72%;
+        color: #fff;
+//      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); 
+        .sys-title {
+            text-align: center;
+            font-size: 38px;
+            line-height: 150px;
+            margin: 0px;
+            font-weight: bold;
+        }
+        .login-form{
+           
+            width: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            margin-top: 15px;
+        }
+        .col-xs-10,.col-xs-9{
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+        .form-control{
+            display: block;
+            width: 73% !important;
+            height: 20px;
+            line-height: 20px;
+            background: #242128;
+            border-radius: 5px;
+            margin-left: 2px;
+            font-size: 12px;
+            text-indent: 20px; 
+//          padding-left: 20px;
+
+        }
+        .label_base{
+//          height: 30px;
+            line-height: 20px;
+            font-size: 12px;
+            color: #fefefe;
+            white-space:nowrap;
+        }
+        a{
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+        .nba_logo{
+            width: 60%;
+            height: 60px;
+            background: url(../../assets/imgs/NBA_Logo.svg) no-repeat center center;
+            background-size:70%;           
+            margin: 0 auto;
+            margin-top: 20px;   
+        }
+        .login_btn{
+            padding: none;
+           width: 66px;
+           height: 66px;
+           background: url(../../assets/imgs/Login_Btn.svg) no-repeat center center;
+           background-size:70%;  
+           border:none;
+           margin-left: -20px;
+           
+            
+        }
+        .text-danger{
+            font-size:12px ;
+        }
+    }
+}

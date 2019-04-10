@@ -1,0 +1,196 @@
+<div class="user-table-container">
+  <form
+    class="form-inline top-filter-form form-bgcolor col-padding"
+    role="form"
+  >
+    <div class="form-group btn-margin-1rem">
+      <div>赛事起止时间：</div>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <input
+        class="form-control"
+        type="text"
+        name="begin_time"
+        placeholder="请选择开始日期"
+        bsDatepicker
+        [(ngModel)]="beginTime"
+      />
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <div>至</div>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <input
+        class="form-control"
+        type="text"
+        name="end_time"
+        placeholder="请选择结束日期"
+        bsDatepicker
+        [(ngModel)]="endTime"
+      />
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button">
+        报名付费
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="addMatch()">
+        添加赛事
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="modifyMatch()">
+        编辑赛事
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="entryResult()">
+        录入成绩
+      </button>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group btn-margin-1rem"></div>
+    <div class="form-group btn-margin-1rem">
+      <input class="form-control" type="text" placeholder="输入名称查询" name="search_text" [(ngModel)]="searchText"/>
+    </div>
+    <!-- 全部赛事状态选择 -->
+    <div class="form-group btn-margin-1rem">
+      <select
+        class="form-control"
+        name="match_state_select"
+        id="match_state_select"
+        [(ngModel)]="matchStateId"
+        (ngModelChange)="selectChange()"
+      >
+        <option selected value="">全部状态</option>
+        <option [value]="item.id" *ngFor="let item of matchStateList">
+          {{ item.desc }}
+        </option>
+      </select>
+    </div>
+    <!-- 全部报名条件 -->
+    <div class="form-group btn-margin-1rem">
+      <select
+        class="form-control"
+        name="match_type_select"
+        id="match_type_select"
+        [(ngModel)]="matchTypeId"
+        (ngModelChange)="selectChange()"
+      >
+        <option selected value="">全部报名条件</option>
+        <option [value]="item.id" *ngFor="let item of matchTypeList">
+          {{ item.desc }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group btn-margin-1rem"></div>
+    <div class="form-group btn-margin-1rem"></div>
+    <div class="form-group btn-margin-1rem"></div>
+    <div class="form-group btn-margin-1rem"></div>
+    <div class="form-group btn-margin-1rem"></div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="search()">
+        查&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="deleteMatch()">
+        删除赛事
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="detailMatch()">
+        赛事详情
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+        <button class="btn btn-primary" type="button" (click)="derivedForm()">
+          导出表格
+        </button>
+      </div>
+  </form>
+  <div class="tdiv"></div>
+  <div class="row no-margin">
+    <div class="col-xs-12 form-bgcolor col-padding">
+      <div class="user-item-container">
+        <p-table [value]="matchList">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="local_table_check">
+                <p-checkbox (onChange)="checks($event)" label=""></p-checkbox>
+              </th>
+              <th>序号</th>
+              <th>赛事名称</th>
+              <th>赛事门票</th>
+              <th>报名条件</th>
+              <th>人数/球队限制</th>
+              <th>已报名</th>
+              <th>报名起止时间</th>
+              <th>活动起止时间</th>
+              <th>赛事状态</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-match let-rowIndex="rowIndex">
+            <tr>
+              <!--  *ngFor="let match of matchList;let i=index" -->
+              <td>
+                <p-checkbox
+                  value="{{ rowIndex }}"
+                  [(ngModel)]="selectedOperation"
+                ></p-checkbox>
+              </td>
+              <td>{{ rowIndex }}</td>
+              <td>{{ match.match_name }}</td>
+              <td>{{ match.enlis_price }}</td>
+              <!-- <td>{{match.match_type}}</td> -->
+              <td>
+                <ul [ngSwitch]="match.match_type">
+                  <li *ngSwitchCase="1">个人赛</li>
+                  <li *ngSwitchCase="2">球队赛</li>
+                  <li *ngSwitchDefault></li>
+                </ul>
+              </td>
+              <td>{{ match.match_num }}</td>
+              <td>{{ match.enroll_num }}</td>
+              <td>
+                {{ match.enlist_start_date | date: "yyyy-MM-dd"
+                }}<br />{{
+                  match.enlist_end_date | date: "yyyy-MM-dd"
+                }}
+              </td>
+              <td>
+                {{ match.match_start_date | date: "yyyy-MM-dd"
+                }}<br />{{ match.match_end_date | date: "yyyy-MM-dd" }}
+              </td>
+              <!-- <td>{{match.match_state}}</td> -->
+              <td>
+                <ul [ngSwitch]="match.match_state">
+                  <li *ngSwitchCase="1">登记</li>
+                  <li *ngSwitchCase="2">挂网</li>
+                  <li *ngSwitchCase="3">报名</li>
+                  <li *ngSwitchCase="4">报名截止</li>
+                  <li *ngSwitchCase="5">开始</li>
+                  <li *ngSwitchCase="6">结束</li>
+                  <li *ngSwitchCase="8">特殊挂起</li>
+                  <li *ngSwitchCase="9">异常终止</li>
+                  <li *ngSwitchDefault></li>
+                </ul>
+              </td>
+              <!-- 赛事状态：match_state
+                 1：登记  2：挂网  3：报名 4：报名截止 5：开始  6：结束  8：特殊挂起 9：异常终止 -->
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-paginator
+          rows="{{ pageSize }}"
+          totalRecords="{{ totalSize }}"
+          [rowsPerPageOptions]="[15, 20, 30]"
+          (onPageChange)="onPage($event)"
+        ></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <p-dialog [(visible)]="display" [width]="500" [height]="600"> -->

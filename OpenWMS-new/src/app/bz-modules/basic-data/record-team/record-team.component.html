@@ -1,0 +1,98 @@
+<p>
+  <!-- <div class=""> record-team works!</div> -->
+  <!--  <i class="fa fa-times" aria-hidden="true"></i>
+  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+  <i class="fa fa-times" aria-hidden="true"></i>
+  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+  <i class="fa fa-times" aria-hidden="true"></i>
+  <i class="fa fa-plus" aria-hidden="true"></i> -->
+</p>
+
+<form class="form-horizontal">
+  <h3>赛事列表 > {{ titleText }} > 录入成绩</h3>
+  <div class="form-group"></div>
+  <div *ngFor="let item of totalList; let i = index">
+    <div class="form-group">
+      <label class="col-md-2 control-label">第{{ i + 1 }}场比赛成绩</label>
+      <div class="col-md-2 control-label" (click)="addSite(i)">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span>新增场次</span>
+      </div>
+      <div class="col-md-6 control-label"></div>
+    </div>
+    <div class="form-group">
+      <div
+        *ngFor="let site of totalList[i].list; let j = index"
+        class="form-group"
+      >
+        <label for="top_name" class="col-md-1 control-label">球队：</label>
+        <div class="col-md-2 control-label">
+          <select
+            class="form-control"
+            name="top_name"
+            id="match_type"
+            [(ngModel)]="site.top_name"
+          >
+            <option selected value="">请选择</option>
+            <option [value]="team.id" *ngFor="let team of teamList">
+              {{ team.desc }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-2 control-label">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="输入成绩"
+            name="site_score"
+            [(ngModel)]="site.top_score"
+          />
+        </div>
+        <label for="bot_name" class="col-md-2 control-label">VS 球队：</label>
+        <div class="col-md-2 control-label">
+          <select
+            class="form-control"
+            name="bot_name"
+            id="match_type"
+            [(ngModel)]="site.bot_name"
+          >
+            <option selected value="">请选择</option>
+            <option [value]="team.id" *ngFor="let team of teamList">
+              {{ team.desc }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-2 control-label">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="输入成绩"
+            name="site_score"
+            [(ngModel)]="site.bot_score"
+          />
+        </div>
+        <div class="col-md-1 control-label" (click)="deleteSite(i, j)">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-2 control-label" (click)="addTeam()">
+      <i class="fa fa-plus-circle" aria-hidden="true"></i>
+      <span>新增比赛球队</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <button type="button" class="btn btn-default">返回</button>
+    </div>
+    <div class="col-sm-offset-2 col-sm-2">
+      <button type="submit" class="btn btn-primary" (click)="doSubmit()">
+        确认添加
+      </button>
+    </div>
+  </div>
+</form>

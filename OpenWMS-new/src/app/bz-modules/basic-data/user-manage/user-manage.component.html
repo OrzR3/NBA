@@ -1,0 +1,420 @@
+<div class="user-table-container">
+  <form
+    class="form-inline top-filter-form form-bgcolor col-padding"
+    role="form"
+  >
+    <div class="form-group btn-margin-1rem">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="这里输入编号/姓名/用户名"
+        name="search_text"
+        [(ngModel)]="searchText"
+      />
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <div>最近登录时间：</div>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <input
+        class="form-control"
+        type="text"
+        name="begin_time"
+        placeholder="开始日期"
+        bsDatepicker
+        [(ngModel)]="beginTime"
+      />
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <div>至</div>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <input
+        class="form-control"
+        type="text"
+        name="end_time"
+        placeholder="结束日期"
+        bsDatepicker
+        [(ngModel)]="endTime"
+      />
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="search()">
+        <i class="fa fa-search"></i>&nbsp;&nbsp;查询
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="add()">
+        <i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;新增
+      </button>
+    </div>
+    <div class="form-group btn-margin-1rem">
+      <button class="btn btn-primary" type="button" (click)="delete()">
+        <i class="fa fa-trash"></i>&nbsp;&nbsp;删除
+      </button>
+    </div>
+    <br />
+    <br />
+  </form>
+  <div class="row no-margin">
+    <div class="col-xs-12 form-bgcolor col-padding">
+      <div class="user-item-container">
+        <p-table [value]="userList">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="local_table_check">
+                <p-checkbox (onChange)="checks($event)" label=""></p-checkbox>
+              </th>
+              <th>序号</th>
+              <th>用户名</th>
+              <th>姓名</th>
+              <th>角色</th>
+              <th>最近登录</th>
+              <th>操作</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
+            <tr>
+              <!--  *ngFor="let match of matchList;let i=index" -->
+              <td>
+                <p-checkbox
+                  value="{{ rowIndex }}"
+                  [(ngModel)]="selectedOperation"
+                ></p-checkbox>
+              </td>
+              <td>{{ rowIndex + 1 }}</td>
+              <td>{{ user.user_name }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.role_name }}</td>
+              <td>{{ user.login_time }}</td>
+              <td>
+                <span (click)="modify(rowIndex)"
+                  ><i class="fa fa-pencil"></i
+                ></span>
+                <span class="form-group btn-margin-1rem"></span>
+                <span (click)="delete(rowIndex)"
+                  ><i class="fa fa-trash-o"></i
+                ></span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-paginator
+          rows="{{ pageSize }}"
+          totalRecords="{{ totalSize }}"
+          [rowsPerPageOptions]="[15, 20, 30]"
+          (onPageChange)="onPage($event)"
+        ></p-paginator>
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog
+    header="Confirmation"
+    icon="pi pi-exclamation-triangle"
+  ></p-confirmDialog>
+  <p-dialog [(visible)]="display">
+    <p-header>
+      {{ headStr }}
+    </p-header>
+    <form [formGroup]="userInfoForm" autocomplete="off" style="width:500px;">
+      <div class="ui-g">
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-3 fydd-new-location-input-container">
+          <label><span class="is-must">*</span>角色</label>
+        </div>
+        <div class="ui-g-4 fydd-new-location-input-container">
+          <span class="ui-float-label">
+            <p-multiSelect
+              [options]="roleList"
+              [(ngModel)]="userInfo.role_name"
+              formControlName="roleName"
+              defaultLabel="请选择角色"
+            ></p-multiSelect>
+            <!-- 下拉选项，改为多选 -->
+            <!--  <p-dropdown
+              [options]="roleList"
+              [(ngModel)]="userInfo.role_name"
+              formControlName="addRoleSite"
+              placeholder="请选择角色"
+            ></p-dropdown> -->
+          </span>
+          <!-- 校验信息 -->
+          <div
+            [hidden]="
+              userInfoForm.get('roleName').valid ||
+              userInfoForm.get('roleName').untouched
+            "
+          >
+            <p
+              [hidden]="!userInfoForm.hasError('required', 'roleName')"
+              class="local_form_tips"
+            >
+              角色是必选的
+            </p>
+          </div>
+        </div>
+        <div class="ui-g-3 fydd-new-location-input-container"></div>
+
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-3 fydd-new-location-input-container">
+          <label><span class="is-must">*</span>场馆</label>
+        </div>
+        <div class="ui-g-4 fydd-new-location-input-container">
+          <span class="ui-float-label">
+            <p-multiSelect
+              [options]="siteList"
+              [(ngModel)]="userInfo.site"
+              formControlName="site"
+              defaultLabel="请选择"
+            ></p-multiSelect>
+          </span>
+          <!-- 校验信息 -->
+          <div
+            [hidden]="
+              userInfoForm.get('site').valid ||
+              userInfoForm.get('site').untouched
+            "
+          >
+            <p
+              [hidden]="!userInfoForm.hasError('required', 'site')"
+              class="local_form_tips"
+            >
+              场馆是必选的
+            </p>
+          </div>
+        </div>
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-3 fydd-new-location-input-container">
+          <label><span class="is-must">*</span>用户名</label>
+        </div>
+        <div class="ui-g-4 fydd-new-location-input-container">
+          <span class="ui-float-label">
+            <input
+              class="fydd-new-location-input"
+              type="text"
+              size="30"
+              pInputText
+              formControlName="userName"
+              [(ngModel)]="userInfo.user_name"
+              placeholder="这里输入用户名"
+            />
+          </span>
+          <!-- 校验信息 -->
+          <div
+            [hidden]="
+              userInfoForm.get('userName').valid ||
+              userInfoForm.get('userName').untouched
+            "
+          >
+            <p
+              [hidden]="!userInfoForm.hasError('required', 'userName')"
+              class="local_form_tips"
+            >
+              用户名是必填的
+            </p>
+          </div>
+        </div>
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-9 fydd-new-location-input-container">
+          <div class="ui-g-4 fydd-new-location-input-container">
+            <!-- 加入表单验证 -->
+            <label><span class="is-must">*</span>姓名</label>
+          </div>
+          <div class="ui-g-5 fydd-new-location-input-container">
+            <span class="ui-float-label">
+              <input
+                class="fydd-new-location-input"
+                type="text"
+                size="30"
+                pInputText
+                validate
+                formControlName="name"
+                [(ngModel)]="userInfo.name"
+                placeholder="这里输入姓名"
+              />
+            </span>
+            <!-- 校验信息 -->
+            <div
+              [hidden]="
+                userInfoForm.get('name').valid ||
+                userInfoForm.get('name').untouched
+              "
+            >
+              <p
+                [hidden]="!userInfoForm.hasError('required', 'name')"
+                class="local_form_tips"
+              >
+                姓名是必填的
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-9 fydd-new-location-input-container">
+          <div class="ui-g-4 fydd-new-location-input-container">
+            <label><span class="is-must">*</span>手机号</label>
+          </div>
+          <div class="ui-g-5 fydd-new-location-input-container">
+            <span class="ui-float-label">
+              <input
+                class="fydd-new-location-input"
+                type="text"
+                size="30"
+                pInputText
+                formControlName="phone"
+                [(ngModel)]="userInfo.phone"
+                placeholder="这里输入手机号"
+                maxlength="11"
+              />
+            </span>
+            <!-- 校验信息 -->
+            <div
+              [hidden]="
+                userInfoForm.get('phone').valid ||
+                userInfoForm.get('phone').pristine
+              "
+            >
+              <p
+                [hidden]="!userInfoForm.hasError('phone', 'phone')"
+                class="local_form_tips"
+              >
+                {{ userInfoForm.getError("phone", "phone")?.info }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-9 fydd-new-location-input-container">
+          <div class="ui-g-4 fydd-new-location-input-container">
+            <label><span>&nbsp;&nbsp;</span>邮箱</label>
+          </div>
+          <div class="ui-g-5 fydd-new-location-input-container">
+            <span class="ui-float-label">
+              <input
+                class="fydd-new-location-input"
+                type="text"
+                size="30"
+                pInputText
+                formControlName="email"
+                [(ngModel)]="userInfo.user_email"
+                placeholder="这里输入邮箱"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div class="ui-g-9 fydd-new-location-input-container">
+          <div class="ui-g-4 fydd-new-location-input-container">
+            <label><span>&nbsp;&nbsp;</span>备注</label>
+          </div>
+          <div class="ui-g-5 fydd-new-location-input-container">
+            <span class="ui-float-label">
+              <input
+                class="fydd-new-location-input"
+                type="text"
+                size="30"
+                pInputText
+                formControlName="desc"
+                [(ngModel)]="userInfo.desc"
+                placeholder="这里输入备注"
+              />
+            </span>
+          </div>
+        </div>
+        <div class="ui-g-2 fydd-new-location-input-container"></div>
+        <div
+          formGroupName="passwordGroup"
+          class="ui-g-9 fydd-new-location-input-container"
+        >
+          <label class="ui-g-4 fydd-new-location-input-container"
+            ><span class="is-must">*</span>密码</label
+          >
+          <div class="ui-g-5">
+            <span class="ui-float-label">
+              <input
+                type="password"
+                pPassword
+                size="30"
+                pInputText
+                formControlName="password"
+                [(ngModel)]="userInfo.user_password"
+                placeholder="密码输入6-20位，不能输入空格"
+                maxlength="20"
+              />
+            </span>
+            <!-- 校验信息 -->
+            <div
+              [hidden]="
+                !userInfoForm.hasError('minlength', [
+                  'passwordGroup',
+                  'password'
+                ])
+              "
+              class="local_clear local_form_tips"
+            >
+              密码最小长度是6
+            </div>
+          </div>
+
+          <label class="ui-g-4 fydd-new-location-input-container local_clear"
+            ><span class="is-must">*</span>确认密码</label
+          >
+          <div class="ui-g-5">
+            <span class="ui-float-label">
+              <input
+                type="password"
+                pPassword
+                size="30"
+                pInputText
+                formControlName="pconfirm"
+                [(ngModel)]="userInfo.pconfirm"
+                placeholder="确认密码"
+                maxlength="20"
+              />
+            </span>
+            <div
+              [hidden]="
+                !userInfoForm.hasError('equal', 'passwordGroup') ||
+                this.userInfoForm.get('passwordGroup').get('pconfirm')
+                  .untouched ||
+                userInfoForm.hasError('minlength', [
+                  'passwordGroup',
+                  'password'
+                ])
+              "
+              class="local_clear local_form_tips"
+            >
+              {{ userInfoForm.getError("equal", "passwordGroup")?.info }}
+            </div>
+          </div>
+          <!-- <div class="ui-g-2 fydd-new-location-input-container"></div> -->
+        </div>
+      </div>
+    </form>
+    <p-footer>
+      <button
+        type="button"
+        pButton
+        icon=""
+        (click)="formSave()"
+        label="保存"
+        *ngIf="true"
+      ></button>
+      <button
+        type="button"
+        pButton
+        icon=""
+        (click)="fomrCancel()"
+        label="取消"
+        *ngIf="true"
+      ></button>
+    </p-footer>
+  </p-dialog>
+</div>

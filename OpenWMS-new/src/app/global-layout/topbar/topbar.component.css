@@ -1,0 +1,11 @@
+
+.position-relative {
+  position: relative;
+  z-index: 1000;
+}
+/*# sourceMappingURL=topbar.component.css.map */
+.top-logo {
+  width:120px;
+  height: 70px;
+  background: url('../../../assets/imgs/LEYUN_Logo.png') no-repeat 0 center;
+}

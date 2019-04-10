@@ -1,0 +1,8 @@
+{
+  "/":{
+    "target":"http://192.168.5.177:8080",		
+    "description-old-target":"http://172.16.24.251:8080",
+    "changeOrigin":true,
+    "secure": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "match_id": "1",
+  "match_name": "赛事名字",
+  "match_start_date": 1554393600000,
+  "match_end_date": 1554566400000,
+  "match_type": "1",
+  "match_writing": "这是文案介绍",
+  "match_num": 20,
+  "enlist_start_date": 1554134400000,
+  "enlist_end_date": 1554307200000,
+  "enlist_mode": "0",
+  "enlis_phone": "1111111",
+  "enlis_person": "联系人",
+  "enlis_picture": null,
+  "enlis_big_picture": null,
+  "enlis_price": 20.0,
+  "Is_enable": 0,
+  "creator_id": "",
+  "create_date": 1554170855000,
+  "modifier_id": null,
+  "modify_date": 1554134400000
+}

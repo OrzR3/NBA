@@ -1,0 +1,48 @@
+<div class="container-flud login-screen">
+    <div class="login-form-container">
+<!--        <h3 class="center-block sys-title">乐运体育</h3>-->
+		<div class="nba_logo"></div>
+        <form #form="ngForm" (ngSubmit)="form.form.valid" novalidate class="form-horizontal login-form" role="form">
+            <div class="col-xs-9">
+            	<div class="form-group" [ngClass]="{ 'has-error': form.submitted && !userName.valid }">
+                <div class="col-xs-12">
+                	<label class="label_base col-xs-3">姓名</label>
+                    <input required [(ngModel)]="user.user_name" name="userName" #userName="ngModel" type="text" class="form-control col-xs-9" placeholder="username">
+                    <div *ngIf="form.submitted && !userName.valid  && vld == 0" class="text-danger">{{'userLogin.userNameDanger' | translate}}</div>
+                    <div *ngIf="form.submitted && vld == -1" class="text-danger">用户名不存在！</div>
+                </div>
+	            </div>
+	            <div class="form-group" [ngClass]="{ 'has-error': form.submitted && !password.valid }">
+	                <div class="col-xs-12">
+	                	<label class="label_base col-xs-3">密码</label>
+	                    <input required minlength="6" [(ngModel)]="user.user_password" name="password" #password="ngModel" type="password" class="form-control col-xs-9"
+	                        placeholder="password">
+	                    <div *ngIf="form.submitted && !password.valid && vld == 0" class="text-danger">{{'userLogin.passWordDanger' | translate}}</div>
+	                    <div *ngIf="form.submitted && vld == -2" class="text-danger">用户密码错误！</div>
+	                </div>
+	            </div>
+            </div>
+            <div class="col-xs-3">
+            	<div class="form-group">
+	                <div class="col-xs-12">
+	                    <button type="submit" class="btn btn-primary btn-block login_btn" (click)="login()"></button>
+	                </div>
+	            </div>
+            </div>
+            
+            <!--<div class="form-group">
+                <div class="col-xs-4">
+                    <a href="javascript:void(0);" (click)="forgetPwd()" class="btn-link btn-block">{{'userLogin.forgotPass' | translate}}</a>
+                </div>
+                <div class="col-xs-4">
+                    <a href="https://gitee.com/mumu-osc/OpenWMS-Frontend" target="_blank">
+                        <i class="fa fa-github fa-2" aria-hidden="true"></i> {{'userLogin.checkOut' | translate}}
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a href="http://www.ngfans.net/" target="_blank">{{'userLogin.newChineseCom' | translate}}</a>
+                </div>
+            </div>-->
+        </form>
+    </div>
+</div>

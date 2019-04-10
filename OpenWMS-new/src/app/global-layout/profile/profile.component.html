@@ -1,0 +1,53 @@
+<div class="profile" [ngClass]="{'profile-expanded':active}">
+    <a href="#" (click)="onClick($event)">
+        <img class="profile-image" src="assets/imgs/io.png" />
+        <span class="profile-name">{{user.user_code}}</span>
+        <!-- <i class="material-icons">keyboard_arrow_down</i> -->
+    </a>
+</div>
+
+<ul class="ultima-menu profile-menu">
+    <li role="menuitem">
+        <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null" [routerLink]="['basic-data']">
+            <!--<i class="material-icons"></i>-->
+            <span class="set_icon"></span>
+            <span>系统管理</span>
+        </a>
+    </li>
+    <li role="menuitem">
+        <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null" [routerLink]="['basic-data/category-form']">
+            <!--<i class="material-icons">person</i>-->
+            <span class="team_icon"></span>
+            <span>客户管理</span>
+        </a>
+    </li>
+    <li role="menuitem">
+        <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null" [routerLink]="['basic-data']">
+            <!--<i class="material-icons">security</i>-->
+            <span class="tranin_icon"></span>
+            <span>课程管理</span>
+        </a>
+    </li>
+
+    <li role="menuitem">
+        <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null" [routerLink]="['basic-data/match-competition']">
+            <!--<i class="material-icons">power_settings_new</i>-->
+            <span class="match_icon"></span>
+            <span>赛事活动</span>
+        </a>
+    </li>
+    <li role="menuitem">
+      <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null" [routerLink]="['basic-data/add-match']">
+          <!--<i class="material-icons">power_settings_new</i>-->
+          <span class="match_icon"></span>
+          <span>添加赛事</span>
+      </a>
+  </li>
+    <li role="menuitem">
+            <a href="#" class="ripplelink" [attr.tabindex]="!active ? '-1' : null" [routerLink]="['basic-data']">
+                <!--<i class="material-icons">power_settings_new</i>-->
+            	<span class="search_icon"></span>
+                <span>统计查询</span>
+            </a>
+        </li>
+</ul>

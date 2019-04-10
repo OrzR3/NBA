@@ -1,0 +1,170 @@
+<form class="form-horizontal">
+  <h3>添加赛事</h3>
+  <div class="form-group">
+    <label for="match_name" class="col-md-1 control-label">赛事名称</label>
+    <div class="col-md-5">
+      <input
+        type="text"
+        class="form-control"
+        id="match_name"
+        name="match_name"
+        placeholder="输入名称"
+        [(ngModel)]="matchInfo.match_name"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="match_writing" class="col-md-1 control-label">赛事介绍</label>
+    <div class="col-md-8">
+      <textarea
+        class="form-control"
+        id="match_writing"
+        name="match_writing"
+        [(ngModel)]="matchInfo.match_writing"
+        rows="3"
+        placeholder="请输入赛事简介"
+      ></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="enlis_picture" class="col-md-1 control-label">封面图片</label>
+    <input
+      type="file"
+      class="col-md-4"
+      id="enlis_picture"
+      name="enlis_picture"
+      [(ngModel)]="matchInfo.enlis_picture"
+      accept="image/*"
+      (change)="fileChange($event)"
+    />
+    <label for="enlis_big_picture" class="col-md-1 control-label">介绍图片</label>
+    <input
+      type="file"
+      class="col-md-4"
+      id="enlis_big_picture"
+      name="enlis_big_picture"
+      (change)="fileChange($event)"
+      accept="image/*"
+    />
+  </div>
+  <div class="form-group">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <img  style="width: 128px;max-height: 130px;" src="{{matchInfo.enlis_picture}}"/>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <img  style="width: 128px;max-height: 130px;" src="{{matchInfo.enlis_big_picture}}"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="match_name" class="col-md-1 control-label">报名时间</label>
+    <div class="col-md-4">
+      <input
+        class="form-control"
+        type="text"
+        name="enlist_start_date"
+        placeholder="请选择开始日期"
+        bsDatepicker
+        [(ngModel)]="matchInfo.enlist_start_date"
+      />
+    </div>
+    <label for="match_name" class="col-md-1">至</label>
+    <span class="col-md-4">
+      <input
+        class="form-control"
+        type="text"
+        name="enlist_end_date"
+        placeholder="请选择结束日期"
+        bsDatepicker
+        [(ngModel)]="matchInfo.enlist_end_date"
+      />
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="match_name" class="col-md-1 control-label">活动时间</label>
+    <span class="col-md-4">
+      <input
+        class="form-control"
+        type="text"
+        name="match_start_date"
+        placeholder="请选择开始日期"
+        bsDatepicker
+        [(ngModel)]="matchInfo.match_start_date"
+      />
+    </span>
+    <label for="match_name" class="col-md-1">至</label>
+    <span class="col-md-4">
+      <input
+        class="form-control"
+        type="text"
+        name="match_end_date"
+        placeholder="请选择结束日期"
+        bsDatepicker
+        [(ngModel)]="matchInfo.match_end_date"
+      />
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="enlis_picture" class="col-md-2 control-label">是否为球队赛</label>
+    <div class="col-md-3 control-label">
+      <select
+        class="form-control"
+        name="match_type"
+        id="match_type"
+        [(ngModel)]="matchInfo.match_type"
+        (ngModelChange)="selectChange()"
+      >
+        <option selected value="">请选择</option>
+        <option [value]="item.id" *ngFor="let item of matchTypeList">
+          {{ item.desc }}
+        </option>
+      </select>
+    </div>
+    <label for="enlis_picture" class="col-md-1 control-label">赛事状态</label>
+    <div class="col-md-3 control-label">
+      <select
+        class="form-control"
+        name="match_state"
+        id="match_state"
+        [(ngModel)]="matchInfo.match_state"
+        (ngModelChange)="selectChange()"
+      >
+        <option selected value="">请选择</option>
+        <option [value]="item.id" *ngFor="let item of matchStateList">
+          {{ item.desc }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="match_name" class="col-md-2 control-label">限定球队/人数</label>
+    <div class="col-md-3 control-label">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="输入数字"
+      name="match_num"
+      [(ngModel)]="matchInfo.match_num"
+    />
+    </div>
+    <label for="match_name" class="col-md-1 control-label">门票价格</label>
+    <div class="col-md-3 control-label">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="￥0.00"
+        name="enlist_price"
+        [(ngModel)]="matchInfo.enlis_price"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <button type="button" class="btn btn-default">返回</button>
+    </div>
+    <div class="col-sm-offset-2 col-sm-2">
+      <button type="submit" class="btn btn-primary" (click)="doSubmit()">确认添加</button>
+    </div>
+  </div>
+</form>
